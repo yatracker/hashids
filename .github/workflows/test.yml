@@ -13,5 +13,5 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
       - name: Run Maven
-        run: mvn clean --batch-mode verify
+        run: mvn clean --batch-mode package
 
