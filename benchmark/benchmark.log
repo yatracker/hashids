@@ -1,0 +1,329 @@
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.default_decode_my
+
+# Run progress: 0.00% complete, ETA 00:50:40
+# Fork: 1 of 2
+# Warmup Iteration   1: 2693176.528 ops/s
+# Warmup Iteration   2: 2690061.496 ops/s
+Iteration   1: 2689923.357 ops/s
+Iteration   2: 2688166.293 ops/s
+Iteration   3: 2686314.994 ops/s
+Iteration   4: 2681392.742 ops/s
+Iteration   5: 2685149.520 ops/s
+
+# Run progress: 6.25% complete, ETA 00:47:35
+# Fork: 2 of 2
+# Warmup Iteration   1: 2767977.328 ops/s
+# Warmup Iteration   2: 2768450.572 ops/s
+Iteration   1: 2764606.778 ops/s
+Iteration   2: 2767794.479 ops/s
+Iteration   3: 2766001.051 ops/s
+Iteration   4: 2767078.719 ops/s
+Iteration   5: 2766723.783 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.default_decode_my":
+  2726315.172 ±(99.9%) 64040.880 ops/s [Average]
+  (min, avg, max) = (2681392.742, 2726315.172, 2767794.479), stdev = 42359.077
+  CI (99.9%): [2662274.292, 2790356.052] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.default_decode_oth
+
+# Run progress: 12.50% complete, ETA 00:44:25
+# Fork: 1 of 2
+# Warmup Iteration   1: 2271873.460 ops/s
+# Warmup Iteration   2: 2297731.867 ops/s
+Iteration   1: 2305471.144 ops/s
+Iteration   2: 2305584.178 ops/s
+Iteration   3: 2310836.214 ops/s
+Iteration   4: 2303935.028 ops/s
+Iteration   5: 2306609.881 ops/s
+
+# Run progress: 18.75% complete, ETA 00:41:14
+# Fork: 2 of 2
+# Warmup Iteration   1: 2219306.943 ops/s
+# Warmup Iteration   2: 2260830.112 ops/s
+Iteration   1: 2260798.785 ops/s
+Iteration   2: 2257800.072 ops/s
+Iteration   3: 2255126.925 ops/s
+Iteration   4: 2261085.974 ops/s
+Iteration   5: 2254165.321 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.default_decode_oth":
+  2282141.352 ±(99.9%) 39018.688 ops/s [Average]
+  (min, avg, max) = (2254165.321, 2282141.352, 2310836.214), stdev = 25808.446
+  CI (99.9%): [2243122.664, 2321160.041] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.default_encode_my
+
+# Run progress: 25.00% complete, ETA 00:38:04
+# Fork: 1 of 2
+# Warmup Iteration   1: 6836758.553 ops/s
+# Warmup Iteration   2: 6876104.063 ops/s
+Iteration   1: 6878079.628 ops/s
+Iteration   2: 6882280.860 ops/s
+Iteration   3: 6879691.734 ops/s
+Iteration   4: 6881040.074 ops/s
+Iteration   5: 6880856.548 ops/s
+
+# Run progress: 31.25% complete, ETA 00:34:53
+# Fork: 2 of 2
+# Warmup Iteration   1: 6911875.974 ops/s
+# Warmup Iteration   2: 6964046.589 ops/s
+Iteration   1: 6963052.702 ops/s
+Iteration   2: 6971176.974 ops/s
+Iteration   3: 6953550.334 ops/s
+Iteration   4: 6969151.984 ops/s
+Iteration   5: 6956698.736 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.default_encode_my":
+  6921557.957 ±(99.9%) 66076.560 ops/s [Average]
+  (min, avg, max) = (6878079.628, 6921557.957, 6971176.974), stdev = 43705.553
+  CI (99.9%): [6855481.398, 6987634.517] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.default_encode_oth
+
+# Run progress: 37.50% complete, ETA 00:31:43
+# Fork: 1 of 2
+# Warmup Iteration   1: 4310257.147 ops/s
+# Warmup Iteration   2: 4407675.664 ops/s
+Iteration   1: 4422867.765 ops/s
+Iteration   2: 4424164.898 ops/s
+Iteration   3: 4425511.885 ops/s
+Iteration   4: 4424327.750 ops/s
+Iteration   5: 4424315.253 ops/s
+
+# Run progress: 43.75% complete, ETA 00:28:33
+# Fork: 2 of 2
+# Warmup Iteration   1: 4394317.195 ops/s
+# Warmup Iteration   2: 4424116.604 ops/s
+Iteration   1: 4428954.155 ops/s
+Iteration   2: 4429788.540 ops/s
+Iteration   3: 4426367.207 ops/s
+Iteration   4: 4423375.174 ops/s
+Iteration   5: 4423920.061 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.default_encode_oth":
+  4425359.269 ±(99.9%) 3541.210 ops/s [Average]
+  (min, avg, max) = (4422867.765, 4425359.269, 4429788.540), stdev = 2342.291
+  CI (99.9%): [4421818.059, 4428900.479] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.salt_length_decode_my
+
+# Run progress: 50.00% complete, ETA 00:25:22
+# Fork: 1 of 2
+# Warmup Iteration   1: 2164358.240 ops/s
+# Warmup Iteration   2: 2154728.665 ops/s
+Iteration   1: 2154845.011 ops/s
+Iteration   2: 2153817.131 ops/s
+Iteration   3: 2152520.261 ops/s
+Iteration   4: 2153685.424 ops/s
+Iteration   5: 2152349.050 ops/s
+
+# Run progress: 56.25% complete, ETA 00:22:12
+# Fork: 2 of 2
+# Warmup Iteration   1: 2184378.823 ops/s
+# Warmup Iteration   2: 2205566.651 ops/s
+Iteration   1: 2203907.782 ops/s
+Iteration   2: 2208014.557 ops/s
+Iteration   3: 2208155.403 ops/s
+Iteration   4: 2207820.421 ops/s
+Iteration   5: 2204310.695 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.salt_length_decode_my":
+  2179942.573 ±(99.9%) 42297.677 ops/s [Average]
+  (min, avg, max) = (2152349.050, 2179942.573, 2208155.403), stdev = 27977.295
+  CI (99.9%): [2137644.896, 2222240.251] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.salt_length_decode_oth
+
+# Run progress: 62.50% complete, ETA 00:19:02
+# Fork: 1 of 2
+# Warmup Iteration   1: 1749787.248 ops/s
+# Warmup Iteration   2: 1783178.407 ops/s
+Iteration   1: 1783605.491 ops/s
+Iteration   2: 1782373.270 ops/s
+Iteration   3: 1783567.999 ops/s
+Iteration   4: 1781462.825 ops/s
+Iteration   5: 1783187.507 ops/s
+
+# Run progress: 68.75% complete, ETA 00:15:51
+# Fork: 2 of 2
+# Warmup Iteration   1: 1771356.717 ops/s
+# Warmup Iteration   2: 1804187.130 ops/s
+Iteration   1: 1811207.224 ops/s
+Iteration   2: 1821689.082 ops/s
+Iteration   3: 1819999.844 ops/s
+Iteration   4: 1819440.745 ops/s
+Iteration   5: 1820275.028 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.salt_length_decode_oth":
+  1800680.901 ±(99.9%) 28756.985 ops/s [Average]
+  (min, avg, max) = (1781462.825, 1800680.901, 1821689.082), stdev = 19020.965
+  CI (99.9%): [1771923.917, 1829437.886] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.salt_length_encode_my
+
+# Run progress: 75.00% complete, ETA 00:12:41
+# Fork: 1 of 2
+# Warmup Iteration   1: 4036159.658 ops/s
+# Warmup Iteration   2: 4061789.072 ops/s
+Iteration   1: 4058746.699 ops/s
+Iteration   2: 4056917.786 ops/s
+Iteration   3: 4059496.540 ops/s
+Iteration   4: 4059888.672 ops/s
+Iteration   5: 4063701.980 ops/s
+
+# Run progress: 81.25% complete, ETA 00:09:31
+# Fork: 2 of 2
+# Warmup Iteration   1: 4019486.491 ops/s
+# Warmup Iteration   2: 4029732.397 ops/s
+Iteration   1: 4041745.779 ops/s
+Iteration   2: 4042511.363 ops/s
+Iteration   3: 4044735.282 ops/s
+Iteration   4: 4044469.931 ops/s
+Iteration   5: 4039935.119 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.salt_length_encode_my":
+  4051214.915 ±(99.9%) 13976.185 ops/s [Average]
+  (min, avg, max) = (4039935.119, 4051214.915, 4063701.980), stdev = 9244.381
+  CI (99.9%): [4037238.730, 4065191.100] (assumes normal distribution)
+
+
+# JMH version: 1.35
+# VM version: JDK 1.8.0_345, OpenJDK 64-Bit Server VM, 25.345-b01
+# VM invoker: D:\Lib\1.8\jre\bin\java.exe
+# VM options: -Xms4G -Xmx4G
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 20 s each
+# Measurement: 5 iterations, 30 s each
+# Timeout: 10 min per iteration
+# Threads: 8 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.yatracker.benchmark.HashidsBenchmark.salt_length_encode_oth
+
+# Run progress: 87.50% complete, ETA 00:06:20
+# Fork: 1 of 2
+# Warmup Iteration   1: 3362773.221 ops/s
+# Warmup Iteration   2: 3389325.818 ops/s
+Iteration   1: 3389282.361 ops/s
+Iteration   2: 3389012.864 ops/s
+Iteration   3: 3389169.924 ops/s
+Iteration   4: 3389411.578 ops/s
+Iteration   5: 3388285.095 ops/s
+
+# Run progress: 93.75% complete, ETA 00:03:10
+# Fork: 2 of 2
+# Warmup Iteration   1: 3358678.442 ops/s
+# Warmup Iteration   2: 3384156.491 ops/s
+Iteration   1: 3384987.633 ops/s
+Iteration   2: 3385763.698 ops/s
+Iteration   3: 3386267.405 ops/s
+Iteration   4: 3385186.725 ops/s
+Iteration   5: 3383089.540 ops/s
+
+
+Result "com.yatracker.benchmark.HashidsBenchmark.salt_length_encode_oth":
+  3387045.682 ±(99.9%) 3422.060 ops/s [Average]
+  (min, avg, max) = (3383089.540, 3387045.682, 3389411.578), stdev = 2263.481
+  CI (99.9%): [3383623.623, 3390467.742] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:50:45
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                 Mode  Cnt        Score       Error  Units
+HashidsBenchmark.default_decode_my       thrpt   10  2726315.172 ± 64040.880  ops/s
+HashidsBenchmark.default_decode_oth      thrpt   10  2282141.352 ± 39018.688  ops/s
+HashidsBenchmark.default_encode_my       thrpt   10  6921557.957 ± 66076.560  ops/s
+HashidsBenchmark.default_encode_oth      thrpt   10  4425359.269 ±  3541.210  ops/s
+HashidsBenchmark.salt_length_decode_my   thrpt   10  2179942.573 ± 42297.677  ops/s
+HashidsBenchmark.salt_length_decode_oth  thrpt   10  1800680.901 ± 28756.985  ops/s
+HashidsBenchmark.salt_length_encode_my   thrpt   10  4051214.915 ± 13976.185  ops/s
+HashidsBenchmark.salt_length_encode_oth  thrpt   10  3387045.682 ±  3422.060  ops/s

@@ -1,0 +1,19 @@
+<html lang="zh">
+
+<script type="text/javascript" src="hashids.js"></script>
+<script type="text/javascript">
+    const hashids = new Hashids();
+
+    // console.log(hashids.encode(1));
+    // console.log(hashids.encode(12));
+    // console.log(hashids.encode(123));
+    // console.log(hashids.encode(1, 2));
+    // console.log(hashids.encode(1, 2, 3));
+
+    const id = hashids.encodeHex('ff', 'fe', 'fd', 'fc');
+    const hex = hashids.decodeHex(id);
+    console.log(id, hex);
+</script>
+
+
+</html>
