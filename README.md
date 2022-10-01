@@ -1,14 +1,24 @@
-[![hashids](http://hashids.org/public/img/hashids.gif 'Hashids')](http://hashids.org/)
+[![hashids](https://hashids.org/public/img/hashids.gif 'Hashids')](https://hashids.org/)
 
 [README](README.md) | [中文文档](README_zh.md)
 
-This is a new library of Hashids implemented in Java, which almost fully compatible with [niieani/hashids.js](https://github.com/niieani/hashids.js). Here are some of its nice features.
+This is a new library of [Hashids](https://hashids.org) implemented in Java, which almost fully compatible with [niieani/hashids.js](https://github.com/niieani/hashids.js). Here are some of its nice features.
 
 - generates short, unique, non-sequential ids from numbers.
 - support for any Unicode character set encoding, such as emoji characters
 - support `Long.MAX_VALUE` and `BigInteger` numbers
 
 ## Getting started
+
+Add the dependency.
+
+```xml
+<dependency>
+    <groupId>com.yatracker</groupId>
+    <artifactId>hashids</artifactId>
+    <version>2.2.10</version>
+</dependency>
+```
 
 Initialize `Hashids` instances by default, each parameter has a default value and can be left out.
 

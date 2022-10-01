@@ -1,14 +1,24 @@
-[![hashids](http://hashids.org/public/img/hashids.gif 'Hashids')](http://hashids.org/)
+[![hashids](https://hashids.org/public/img/hashids.gif 'Hashids')](https://hashids.org/)
 
 [README](README.md) | [中文文档](README_zh.md)
 
-这是一个新的用 Java 实现的 Hashids 库，几乎完全兼容 [niieani/hashids.js](https://github.com/niieani/hashids.js)，它包含下面这些不错的功能。
+这是一个新的用 Java 实现的 [Hashids](https://hashids.org) 库，几乎完全兼容 [niieani/hashids.js](https://github.com/niieani/hashids.js)，它包含下面这些不错的功能。
 
 - 根据数字生成简短、唯一、非连续的 id
 - 支持任意 Unicode 字符集编码，例如 emoji 字符
 - 支持 Long.MAX_VALUE 以及 BigInteger 的数字
 
 ## 开始
+
+添加依赖
+
+```xml
+<dependency>
+    <groupId>com.yatracker</groupId>
+    <artifactId>hashids</artifactId>
+    <version>2.2.10</version>
+</dependency>
+```
 
 默认初始化 `Hashids` 实例 （每个参数都有默认值，可以不传）
 
