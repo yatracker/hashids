@@ -21,7 +21,7 @@ class HashidsTest {
             .alphabet("🍭😚中国ㅛㅜabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
             .build();
 
-    long count = 2000L;
+    long count = 10000L;
     List<Long> base1 = Arrays.asList(
             Long.MAX_VALUE >> 63, Long.MAX_VALUE >> 62, Long.MAX_VALUE >> 61, Long.MAX_VALUE >> 60,
             Long.MAX_VALUE >> 56, Long.MAX_VALUE >> 52, Long.MAX_VALUE >> 48, Long.MAX_VALUE >> 44,

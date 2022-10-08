@@ -39,7 +39,8 @@ Hashids hashids = new HashidsBuilder()
 
 ## 例子
 
-为了兼容 `BigInteger` 类型的数字，所有的参数和返回类型都使用了 `java.lang.Number`
+为了兼容 `BigInteger` 类型的数字，所有的参数和返回类型都使用了 `java.lang.Number`    
+因此这里不可避免的有些许自动装箱/拆箱导致的性能损耗，但是无需担心。
 
 ```java
 String encoded = hashids.encode(

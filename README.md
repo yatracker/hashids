@@ -5,8 +5,8 @@
 This is a new library of [Hashids](https://hashids.org) implemented in Java, which almost fully compatible with [niieani/hashids.js](https://github.com/niieani/hashids.js). Here are some of its nice features.
 
 - generates short, unique, non-sequential ids from numbers.
-- support for any Unicode character set encoding, such as emoji characters
-- support `Long.MAX_VALUE` and `BigInteger` numbers
+- support any Unicode character set encoding, such as emoji characters.
+- support `Long.MAX_VALUE` and `BigInteger` numbers.
 
 ## Getting started
 
@@ -39,7 +39,8 @@ Hashids hashids = new HashidsBuilder()
 
 ## Quick example
 
-For compatibility with type `BigInteger`, all parameters and return types use `java.lang.Number`
+For compatibility with type `BigInteger`, all parameters and return type use `java.lang.Number`.    
+So there is an unavoidable performance loss of automatic boxing/unboxing here, but don't worry!
 
 ```java
 String encoded = hashids.encode(
