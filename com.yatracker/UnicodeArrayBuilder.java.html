@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnicodeArrayBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.yatracker:hashids</a> &gt; <a href="index.source.html" class="el_package">com.yatracker</a> &gt; <span class="el_source">UnicodeArrayBuilder.java</span></div><h1>UnicodeArrayBuilder.java</h1><pre class="source lang-java linenums">package com.yatracker;
+
+import com.yatracker.unicode.Unicode;
+
+/**
+ * @author ya
+ */
+public class UnicodeArrayBuilder {
+
+    /**
+     * Default initial capacity.
+     */
+    private static final int DEFAULT_CAPACITY = 10;
+
+<span class="fc" id="L15">    private static final Unicode[] DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA = new Unicode[0];</span>
+
+    private Unicode[] value;
+
+    private int size;
+
+<span class="fc" id="L21">    public UnicodeArrayBuilder() {</span>
+<span class="fc" id="L22">        this.value = DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA;</span>
+<span class="fc" id="L23">    }</span>
+
+    public int size() {
+<span class="fc" id="L26">        return this.size;</span>
+    }
+
+    public int capacity() {
+<span class="fc" id="L30">        return this.value.length;</span>
+    }
+
+    public Unicode alphabetAt(int index) {
+<span class="fc" id="L34">        return this.value[index];</span>
+    }
+
+    public UnicodeArrayBuilder slice(int includedBegin, int excludedEnd) {
+<span class="fc" id="L38">        UnicodeArrayBuilder builder = new UnicodeArrayBuilder();</span>
+<span class="fc" id="L39">        builder.value = UnicodeArrayUtil.slice(this.value, includedBegin, excludedEnd);</span>
+<span class="fc" id="L40">        builder.size = excludedEnd - includedBegin;</span>
+<span class="fc" id="L41">        return builder;</span>
+    }
+
+    public void push(Unicode unicodeChar) {
+<span class="fc" id="L45">        int currentSize = this.size;</span>
+<span class="fc" id="L46">        int newSize = currentSize + 1;</span>
+
+<span class="fc" id="L48">        Unicode[] scaledValue = ensureCapacityInternal(newSize);</span>
+<span class="fc" id="L49">        scaledValue[currentSize] = unicodeChar;</span>
+<span class="fc" id="L50">        this.size = newSize;</span>
+<span class="fc" id="L51">    }</span>
+
+    public void push(Unicode[] unicodeChars) {
+<span class="fc" id="L54">        int currentSize = this.size;</span>
+<span class="fc" id="L55">        int unicodeCharsLength = unicodeChars.length;</span>
+<span class="fc" id="L56">        int newSize = currentSize + unicodeCharsLength;</span>
+<span class="fc" id="L57">        Unicode[] scaledValue = ensureCapacityInternal(newSize);</span>
+
+<span class="fc" id="L59">        System.arraycopy(unicodeChars, 0, scaledValue, currentSize, unicodeCharsLength);</span>
+<span class="fc" id="L60">        this.size = newSize;</span>
+<span class="fc" id="L61">    }</span>
+
+    public void unshift(Unicode unicodeChar) {
+<span class="fc" id="L64">        int currentSize = this.size;</span>
+<span class="fc" id="L65">        int newSize = currentSize + 1;</span>
+<span class="fc" id="L66">        Unicode[] scaledValue = ensureCapacityInternal(newSize);</span>
+
+<span class="fc" id="L68">        System.arraycopy(scaledValue, 0, scaledValue, 1, currentSize);</span>
+<span class="fc" id="L69">        scaledValue[0] = unicodeChar;</span>
+<span class="fc" id="L70">        this.size = newSize;</span>
+<span class="fc" id="L71">    }</span>
+
+    public void unshift(Unicode[] unicodeChars) {
+<span class="fc" id="L74">        int currentSize = this.size;</span>
+<span class="fc" id="L75">        int unicodeCharsLength = unicodeChars.length;</span>
+<span class="fc" id="L76">        int newSize = currentSize + unicodeCharsLength;</span>
+<span class="fc" id="L77">        Unicode[] scaledValue = ensureCapacityInternal(newSize);</span>
+
+<span class="fc" id="L79">        System.arraycopy(scaledValue, 0, scaledValue, unicodeCharsLength, currentSize);</span>
+<span class="fc" id="L80">        System.arraycopy(unicodeChars, 0, scaledValue, 0, unicodeCharsLength);</span>
+<span class="fc" id="L81">        this.size = newSize;</span>
+<span class="fc" id="L82">    }</span>
+
+    private Unicode[] ensureCapacityInternal(int minimumCapacity) {
+<span class="fc" id="L85">        Unicode[] oldValue = this.value;</span>
+<span class="fc" id="L86">        int oldCapacity = oldValue.length;</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (oldCapacity == 0) {</span>
+<span class="fc" id="L88">            return this.value = new Unicode[DEFAULT_CAPACITY]; // NOSONAR</span>
+        }
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (minimumCapacity &lt;= oldCapacity) {</span>
+<span class="fc" id="L92">            return oldValue;</span>
+        }
+
+<span class="fc" id="L95">        int growth = minimumCapacity - oldCapacity;</span>
+<span class="fc" id="L96">        int prefGrowth = oldCapacity &gt;&gt; 1;</span>
+<span class="fc" id="L97">        int prefLength = oldCapacity + Math.max(growth, prefGrowth);</span>
+
+<span class="fc" id="L99">        Unicode[] newValue = new Unicode[prefLength];</span>
+<span class="fc" id="L100">        System.arraycopy(oldValue, 0, newValue, 0, this.size);</span>
+<span class="fc" id="L101">        return this.value = newValue; // NOSONAR</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L106">        int currentSize = this.size;</span>
+<span class="fc" id="L107">        Unicode[] currentValue = this.value;</span>
+<span class="fc" id="L108">        StringBuilder builder = new StringBuilder(currentSize);</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        for (int i = 0; i &lt; currentSize; i++) {</span>
+<span class="fc" id="L110">            builder.append(currentValue[i].toCharArray());</span>
+        }
+<span class="fc" id="L112">        return builder.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

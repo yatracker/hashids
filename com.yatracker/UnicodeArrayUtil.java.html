@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnicodeArrayUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.yatracker:hashids</a> &gt; <a href="index.source.html" class="el_package">com.yatracker</a> &gt; <span class="el_source">UnicodeArrayUtil.java</span></div><h1>UnicodeArrayUtil.java</h1><pre class="source lang-java linenums">package com.yatracker;
+
+import com.yatracker.unicode.CharUnicode;
+import com.yatracker.unicode.DualCharUnicode;
+import com.yatracker.unicode.Unicode;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * @author ya
+ */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class UnicodeArrayUtil {
+
+    public static Unicode[] from(String source) {
+<span class="fc" id="L20">        int length = source.length();</span>
+<span class="fc" id="L21">        List&lt;Unicode&gt; alphabets = new ArrayList&lt;&gt;(length);</span>
+<span class="fc" id="L22">        int i = 0;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        while (i &lt; length) {</span>
+<span class="fc" id="L24">            int codePoint = source.codePointAt(i);</span>
+            Unicode alphabet;
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (Character.isSupplementaryCodePoint(codePoint)) {</span>
+<span class="fc" id="L27">                alphabet = new DualCharUnicode(Character.toChars(codePoint));</span>
+<span class="fc" id="L28">                i += 2;</span>
+            } else {
+<span class="fc" id="L30">                alphabet = new CharUnicode((char) codePoint);</span>
+<span class="fc" id="L31">                i++;</span>
+            }
+<span class="fc" id="L33">            alphabets.add(alphabet);</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">        return alphabets.toArray(new Unicode[0]);</span>
+    }
+
+    public static List&lt;Unicode[]&gt; from(String[] sources) {
+<span class="fc" id="L39">        List&lt;Unicode[]&gt; array = new ArrayList&lt;&gt;(sources.length);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        for (String source : sources) {</span>
+<span class="fc" id="L41">            array.add(from(source));</span>
+        }
+<span class="fc" id="L43">        return array;</span>
+    }
+
+    public static Unicode[] slice(Unicode[] source) {
+<span class="fc" id="L47">        return slice(source, 0, source.length);</span>
+    }
+
+    public static Unicode[] slice(Unicode[] source, int includedBegin) {
+<span class="fc" id="L51">        return slice(source, includedBegin, source.length);</span>
+    }
+
+    public static Unicode[] slice(Unicode[] source, int includedBegin, int excludedEnd) {
+<span class="fc" id="L55">        int length = excludedEnd - includedBegin;</span>
+<span class="fc" id="L56">        Unicode[] output = new Unicode[length];</span>
+<span class="fc" id="L57">        System.arraycopy(source, includedBegin, output, 0, length);</span>
+<span class="fc" id="L58">        return output;</span>
+    }
+
+    public static Unicode[] push(Unicode[] ...items) {
+<span class="fc" id="L62">        int size = 0;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (Unicode[] item : items) {</span>
+<span class="fc" id="L64">            size += item.length;</span>
+        }
+<span class="fc" id="L66">        Unicode[] combined = new Unicode[size];</span>
+<span class="fc" id="L67">        int offset = 0;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (Unicode[] item : items) {</span>
+<span class="fc" id="L69">            int length = item.length;</span>
+<span class="fc" id="L70">            System.arraycopy(item, 0, combined, offset, length);</span>
+<span class="fc" id="L71">            offset += length;</span>
+        }
+<span class="fc" id="L73">        return combined;</span>
+    }
+
+    public static Unicode[] push(Unicode firstChar, Unicode[] ...items) {
+<span class="fc" id="L77">        int size = 1;</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (Unicode[] item : items) {</span>
+<span class="fc" id="L79">            size += item.length;</span>
+        }
+<span class="fc" id="L81">        Unicode[] combined = new Unicode[size];</span>
+<span class="fc" id="L82">        int offset = 1;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        for (Unicode[] item : items) {</span>
+<span class="fc" id="L84">            int length = item.length;</span>
+<span class="fc" id="L85">            System.arraycopy(item, 0, combined, offset, length);</span>
+<span class="fc" id="L86">            offset += length;</span>
+        }
+<span class="fc" id="L88">        combined[0] = firstChar;</span>
+<span class="fc" id="L89">        return combined;</span>
+    }
+
+    public static Unicode[] shuffle(Unicode[] input, Unicode[] salt) {
+<span class="pc bpc" id="L93" title="1 of 4 branches missed.">        if (Objects.isNull(salt) || salt.length == 0) {</span>
+<span class="fc" id="L94">            return input;</span>
+        }
+
+<span class="fc" id="L97">        Unicode[] transformed = slice(input);</span>
+
+        int integer;
+<span class="fc" id="L100">        int saltLength = salt.length;</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        for (int i = transformed.length - 1, v = 0, p = 0; i &gt; 0; i--, v++) {</span>
+<span class="fc" id="L102">            v %= saltLength; // NOSONAR</span>
+<span class="fc" id="L103">            integer = salt[v].codePoint();</span>
+<span class="fc" id="L104">            p += integer; // NOSONAR</span>
+<span class="fc" id="L105">            int j = (integer + v + p) % i;</span>
+
+            // swap characters at positions i and j
+<span class="fc" id="L108">            Unicode a = transformed[i];</span>
+<span class="fc" id="L109">            Unicode b = transformed[j];</span>
+<span class="fc" id="L110">            transformed[j] = a;</span>
+<span class="fc" id="L111">            transformed[i] = b;</span>
+        }
+
+<span class="fc" id="L114">        return transformed;</span>
+    }
+
+    public static Unicode[] reverse(List&lt;Unicode&gt; alphabets) {
+<span class="fc" id="L118">        int size = alphabets.size();</span>
+<span class="fc" id="L119">        Unicode[] array = new Unicode[size];</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (int i = size - 1, j = 0; i &gt;= 0 ; i--) {</span>
+<span class="fc" id="L121">            array[j++] = alphabets.get(i); // NOSONAR</span>
+        }
+<span class="fc" id="L123">        return array;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

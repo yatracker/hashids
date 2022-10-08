@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+com.yatracker:hashids,com.yatracker.unicode,DualCharUnicode,2,51,1,3,1,9,1,7,0,6
+com.yatracker:hashids,com.yatracker.unicode,CharUnicode,2,42,1,5,1,9,1,8,0,6
+com.yatracker:hashids,com.yatracker,HashidsBuilder,0,52,0,0,0,16,0,6,0,6
+com.yatracker:hashids,com.yatracker,HashidsUnicodeTable,0,350,1,15,0,52,1,18,0,11
+com.yatracker:hashids,com.yatracker,Hashids,30,693,6,70,5,138,6,44,0,12
+com.yatracker:hashids,com.yatracker,UnicodeArrayBuilder,0,214,0,6,0,57,0,15,0,12
+com.yatracker:hashids,com.yatracker,HashidsException,0,4,0,0,0,2,0,1,0,1
+com.yatracker:hashids,com.yatracker,UnicodeArrayUtil,0,317,1,21,0,63,1,19,0,9

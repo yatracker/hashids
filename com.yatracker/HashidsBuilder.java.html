@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HashidsBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.yatracker:hashids</a> &gt; <a href="index.source.html" class="el_package">com.yatracker</a> &gt; <span class="el_source">HashidsBuilder.java</span></div><h1>HashidsBuilder.java</h1><pre class="source lang-java linenums">package com.yatracker;
+
+/**
+ * @author ya
+ */
+public class HashidsBuilder {
+
+    private String salt;
+
+    private int minLength;
+
+    private String alphabet;
+
+    private String seps;
+
+<span class="fc" id="L16">    public HashidsBuilder() {</span>
+<span class="fc" id="L17">        this.salt = HashidsUnicodeTable.EMPTY_STRING;</span>
+<span class="fc" id="L18">        this.minLength = 0;</span>
+<span class="fc" id="L19">        this.alphabet = HashidsUnicodeTable.DEFAULT_ALPHABET;</span>
+<span class="fc" id="L20">        this.seps = HashidsUnicodeTable.DEFAULT_SEPS;</span>
+<span class="fc" id="L21">    }</span>
+
+    public HashidsBuilder salt(String salt) {
+<span class="fc" id="L24">        this.salt = salt;</span>
+<span class="fc" id="L25">        return this;</span>
+    }
+
+    public HashidsBuilder minLength(int minLength) {
+<span class="fc" id="L29">        this.minLength = minLength;</span>
+<span class="fc" id="L30">        return this;</span>
+    }
+
+    public HashidsBuilder alphabet(String alphabet) {
+<span class="fc" id="L34">        this.alphabet = alphabet;</span>
+<span class="fc" id="L35">        return this;</span>
+    }
+
+    public HashidsBuilder seps(String seps) {
+<span class="fc" id="L39">        this.seps = seps;</span>
+<span class="fc" id="L40">        return this;</span>
+    }
+
+    public Hashids build() {
+<span class="fc" id="L44">        HashidsUnicodeTable table = new HashidsUnicodeTable(this.salt, this.minLength, this.alphabet, this.seps);</span>
+<span class="fc" id="L45">        return new Hashids(table);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

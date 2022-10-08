@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HashidsUnicodeTable.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.yatracker:hashids</a> &gt; <a href="index.source.html" class="el_package">com.yatracker</a> &gt; <span class="el_source">HashidsUnicodeTable.java</span></div><h1>HashidsUnicodeTable.java</h1><pre class="source lang-java linenums">package com.yatracker;
+
+import com.yatracker.unicode.Unicode;
+import com.yatracker.unicode.DualCharUnicode;
+
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+/**
+ * @author ya
+ */
+final class HashidsUnicodeTable {
+
+    public static final String EMPTY_STRING = &quot;&quot;;
+<span class="fc" id="L17">    public static final Number[] EMPTY_NUMBER_ARRAY = new Number[0];</span>
+
+    static final String DEFAULT_ALPHABET = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;;
+
+    static final String DEFAULT_SEPS = &quot;cfhistuCFHISTU&quot;;
+
+<span class="fc" id="L23">    static final Pattern HEX_PATTERN = Pattern.compile(&quot;^[\\dA-Fa-f]+$&quot;);</span>
+
+<span class="fc" id="L25">    private static final Set&lt;String&gt; NEED_ESCAPE_REGEX_CHARS = Collections.unmodifiableSet(</span>
+<span class="fc" id="L26">            new HashSet&lt;&gt;(Arrays.asList(&quot;\\&quot;, &quot;$&quot;, &quot;(&quot;, &quot;)&quot;, &quot;*&quot;, &quot;+&quot;, &quot;.&quot;, &quot;[&quot;, &quot;]&quot;, &quot;?&quot;, &quot;^&quot;, &quot;{&quot;, &quot;}&quot;, &quot;|&quot;))</span>
+    );
+
+    private static final int MIN_ALPHABET_LENGTH = 16;
+    private static final double SEPARATOR_DIV = 3.5;
+    private static final int GUARD_DIV = 12;
+
+    final Unicode[] seps;
+
+    final Unicode[] alphabet;
+
+    final Unicode[] salt;
+
+    final Unicode[] guards;
+
+    final int minLength;
+
+    final Pattern guardsRegExp;
+    final Pattern sepsRegExp;
+    final Pattern allowedCharsRegExp;
+
+<span class="fc" id="L47">    HashidsUnicodeTable(String salt, int minLength, String alphabet, String seps) {</span>
+<span class="fc" id="L48">        this.salt = UnicodeArrayUtil.from(salt);</span>
+<span class="fc" id="L49">        this.minLength = minLength;</span>
+
+<span class="fc" id="L51">        Set&lt;Unicode&gt; uniqAlphabet = unique(alphabet);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (uniqAlphabet.size() &lt; MIN_ALPHABET_LENGTH) {</span>
+<span class="fc" id="L53">            throw new HashidsException(String.format(&quot;Hashids: alphabet must contain at least %s unique characters, provided: %s&quot;, MIN_ALPHABET_LENGTH, uniqAlphabet));</span>
+        }
+
+<span class="fc" id="L56">        Set&lt;Unicode&gt; uniqSeps = unique(seps);</span>
+        // `alphabet` should not contains `seps`
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        Unicode[] alphabetArray = filter(uniqAlphabet, item -&gt; !uniqSeps.contains(item));</span>
+
+        // `seps` should contain only characters present in `alphabet`
+<span class="fc" id="L61">        Unicode[] sepsArray = filter(uniqSeps, uniqAlphabet::contains);</span>
+<span class="fc" id="L62">        sepsArray = UnicodeArrayUtil.shuffle(sepsArray, this.salt);</span>
+
+        int sepsLength;
+        int diff;
+
+<span class="fc bfc" id="L67" title="All 4 branches covered.">        if (sepsArray.length == 0 ||  (((double) alphabetArray.length) / sepsArray.length) &gt; SEPARATOR_DIV) {</span>
+<span class="fc" id="L68">            sepsLength = (int) Math.ceil((alphabetArray.length) / SEPARATOR_DIV);</span>
+
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            if (sepsLength &gt; sepsArray.length) {</span>
+<span class="fc" id="L71">                diff = sepsLength - sepsArray.length;</span>
+<span class="fc" id="L72">                sepsArray = UnicodeArrayUtil.push(sepsArray, UnicodeArrayUtil.slice(alphabetArray, 0, diff));</span>
+<span class="fc" id="L73">                alphabetArray = UnicodeArrayUtil.slice(alphabetArray, diff);</span>
+            }
+        }
+
+<span class="fc" id="L77">        alphabetArray = UnicodeArrayUtil.shuffle(alphabetArray, this.salt);</span>
+<span class="fc" id="L78">        int guardCount = (int) Math.ceil(((double) alphabetArray.length) / GUARD_DIV);</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (alphabetArray.length &lt; 3) {</span>
+<span class="fc" id="L81">            this.guards = UnicodeArrayUtil.slice(sepsArray, 0, guardCount);</span>
+<span class="fc" id="L82">            sepsArray = UnicodeArrayUtil.slice(sepsArray, guardCount);</span>
+        } else {
+<span class="fc" id="L84">            this.guards = UnicodeArrayUtil.slice(alphabetArray, 0, guardCount);</span>
+<span class="fc" id="L85">            alphabetArray = UnicodeArrayUtil.slice(alphabetArray, guardCount);</span>
+        }
+
+<span class="fc" id="L88">        this.seps = sepsArray;</span>
+<span class="fc" id="L89">        this.alphabet = alphabetArray;</span>
+
+<span class="fc" id="L91">        this.guardsRegExp = makeAnyOfCharsRegExp(this.guards);</span>
+<span class="fc" id="L92">        this.sepsRegExp = makeAnyOfCharsRegExp(this.seps);</span>
+<span class="fc" id="L93">        this.allowedCharsRegExp = makeAtLeastSomeCharRegExp(UnicodeArrayUtil.push(this.alphabet, this.guards, this.seps));</span>
+<span class="fc" id="L94">    }</span>
+
+    private static Set&lt;Unicode&gt; unique(String source) {
+<span class="fc" id="L97">        Unicode[] alphabets = UnicodeArrayUtil.from(source);</span>
+<span class="fc" id="L98">        return new LinkedHashSet&lt;&gt;(Arrays.asList(alphabets));</span>
+    }
+
+    private static Unicode[] filter(Set&lt;Unicode&gt; set, Predicate&lt;? super Unicode&gt; filter) {
+<span class="fc" id="L102">        return set.stream().filter(filter).toArray(Unicode[]::new);</span>
+    }
+
+    private static Pattern makeAnyOfCharsRegExp(Unicode[] chars) {
+<span class="fc" id="L106">        String regex = Arrays.stream(chars)</span>
+<span class="fc" id="L107">                .map(HashidsUnicodeTable::escapeRegExp)</span>
+                // we need to sort these from longest to shortest,
+                // as they may contain multibyte unicode characters (these should come first)
+<span class="fc" id="L110">                .sorted((a, b) -&gt; b.length() - a.length())</span>
+<span class="fc" id="L111">                .collect(Collectors.joining(&quot;|&quot;));</span>
+<span class="fc" id="L112">        return Pattern.compile(regex);</span>
+    }
+
+    private static Pattern makeAtLeastSomeCharRegExp(Unicode[] chars) {
+<span class="fc" id="L116">        String regex = Arrays.stream(chars)</span>
+<span class="fc" id="L117">                .map(HashidsUnicodeTable::escapeRegExp)</span>
+                // we need to sort these from longest to shortest,
+                // as they may contain multibyte unicode characters (these should come first)
+<span class="fc" id="L120">                .sorted((a, b) -&gt; b.length() - a.length())</span>
+<span class="fc" id="L121">                .collect(Collectors.joining());</span>
+<span class="fc" id="L122">        return Pattern.compile(&quot;^[&quot; + regex +&quot;]+$&quot;);</span>
+    }
+
+    private static String escapeRegExp(Unicode alphabet) {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        if (alphabet instanceof DualCharUnicode) {</span>
+<span class="fc" id="L127">            return alphabet.toString();</span>
+        }
+<span class="fc" id="L129">        String value = alphabet.toString();</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (NEED_ESCAPE_REGEX_CHARS.contains(value)) {</span>
+<span class="fc" id="L131">            return &quot;\\&quot; + value;</span>
+        }
+
+<span class="fc" id="L134">        return value;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

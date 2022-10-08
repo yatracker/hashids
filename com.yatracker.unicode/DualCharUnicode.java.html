@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DualCharUnicode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.yatracker:hashids</a> &gt; <a href="index.source.html" class="el_package">com.yatracker.unicode</a> &gt; <span class="el_source">DualCharUnicode.java</span></div><h1>DualCharUnicode.java</h1><pre class="source lang-java linenums">package com.yatracker.unicode;
+
+import lombok.RequiredArgsConstructor;
+
+import java.util.Arrays;
+
+/**
+ * @author ya
+ */
+<span class="fc" id="L10">@RequiredArgsConstructor</span>
+public class DualCharUnicode implements Unicode {
+
+    private final char[] chars;
+
+    @Override
+    public int codePoint() {
+<span class="fc" id="L17">        return Character.codePointAt(chars, 0);</span>
+    }
+
+    @Override
+    public char[] toCharArray() {
+<span class="fc" id="L22">        return chars;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L27">        return chars[0] * 31 + chars[1] + Character.MAX_VALUE + 1;</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (this == other) {</span>
+<span class="nc" id="L33">            return true;</span>
+        }
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (!(other instanceof DualCharUnicode)) {</span>
+<span class="fc" id="L36">            return false;</span>
+        }
+<span class="fc" id="L38">        return Arrays.equals(chars, ((DualCharUnicode) other).chars);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L43">        return new String(chars);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
